@@ -1,0 +1,43 @@
+task hello { //先定义一个hello的task
+    doLast { //实现doLast方法
+        println 'Hello world!'
+    }
+}
+
+task hello2 { //先定义一个hello的task
+    doLast { //实现doLast方法
+        println 'Hello world2!'
+    }
+}
+
+
+task hello3 {
+    println 'Hello Earth'
+}
+hello3.doFirst {
+    println 'Hello Venus'
+}
+hello3.doFirst {
+    println 'Hello Mercury'
+}
+hello3.doLast {
+    println 'Hello Mars'
+}
+
+task intro(dependsOn: hello) {
+    doLast {
+        println "I'm Gradle"
+    }
+}
+
+apply plugin: 'java'
+repositories {
+    mavenCentral()
+}
+dependencies {
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '3.6.7.Final'
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+    compile files('dir/file.jar') //certain jar file
+    compile fileTree(dir: 'libs', include: '*.jar') // all the jar files
+}
+
